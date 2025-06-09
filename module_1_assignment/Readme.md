@@ -1,90 +1,70 @@
-# Module 1 Assignment: Introduction to OOP Concepts in C++ for Robotics
+# Module 1 Assignment: URDF and Robot Creation in ROS 2
 
 ## Objective
 
-This assignment aims to introduce basic Object-Oriented Programming (OOP) concepts using C++ within a robotics context. You will develop a series of C++ programs that simulate robotic behavior, utilize sensor data, and demonstrate fundamental OOP principles.
+This assignment focuses on understanding and applying the concepts of URDF (Unified Robot Description Format) to create custom robots in ROS 2. You will design and build a robotic arm with multiple degrees of freedom (DOF), integrate it with a mobile platform, and create an Ackerman drive system.
 
 ## Tasks
 
-### Task 1: Robot Class Implementation
+### Task 1: Create a Custom Transform Tree
 
-- **Define a `Robot` class** with the following attributes:
-  - `name`: The name of the robot.
-  - `speed`: The speed of the robot.
-  - **Physical Attributes:**
-    - `weight`: The weight of the robot.
-    - `size`: The size of the robot.
-    - `number_of_sensors`: The number of sensors the robot has.
+- **Design a robotic arm with 3 DOF** using URDF:
+  - **Define the transform tree** for the robotic arm without including any visualization tags. Focus solely on creating the correct transforms for the arm's joints.
+  - **Do not include any visual elements** at this stage—only the transforms should be defined.
 
-- **Methods for moving the robot:**
-  - `moveForward()`: Simulate the robot moving forward.
-  - `moveBackward()`: Simulate the robot moving backward.
-  - `stop()`: Simulate stopping the robot.
+### Task 2: Add Joints and Visual Elements
 
-- **Instantiate a `Robot` object** and simulate actions by invoking its methods.
+- **Enhance the robotic arm** you created earlier by adding joints:
+  - **Finger Joints:** Use prismatic joint types for the fingers.
+  - **Base Joint:** The base joint should be of the continuous type.
+  - **All Other Joints:** Set these as revolute joints.
 
-- **Use namespaces** to define different robots. Ensure that each action is outputted to the console to demonstrate the robot's behavior.
+- **Add visualization tags** to your robot's URDF to create the body, primarily using cylinder shapes for simplicity.
 
-### Task 2: Simulating Sensor Readings
+### Task 3: Build a Mobile Manipulator
 
-- **Create a C++ program** that represents a robot equipped with temperature and distance sensors.
+- **Integrate the robotic arm** with a mobile robot platform:
+  - **Place the robotic arm** on top of a differential drive robot.
+  - **Connect the arm** using the `base_link` of the differential drive robot.
 
-- **Simulate sensor readings** with hardcoded values:
-  - Example for temperature: `Temperature: 20°C`
-  - Example for distance: `Distance: 100cm`
+- **Create an Ackerman Drive System:**
+  - **Design a car-like robot structure** that represents the front axle rotations for turning, simulating an Ackerman steering mechanism.
 
-- **Print these values** to the console with appropriate descriptions.
 
-### Task 3: Sensor Library Design
-
-- **Design a simple sensor library** that includes classes for different types of sensors:
-  - `TemperatureSensor`: Class for handling temperature readings.
-  - `DistanceSensor`: Class for handling distance measurements.
-
-- **Use these classes in a main program** to simulate getting readings from sensors.
-
-- **Create a single-class template** that can be used for multiple sensor types:
-  - For `double` data
-  - For `string` data
-  - For `char` data
-
-- **Ensure proper documentation** and use a `CMakeLists.txt` file for building the project.
-
-### Task 4: Debugging a Multi-File C++ Project
+### Task 4: Debugging Task - Fixing an Incorrect URDF for a Wheeled Robot with a Lifting Mechanism
 `Task Description:`
 
-Your task is to fix and debug a multi-file C++ project for a robot simulation. The project is incomplete and contains various errors in syntax, logic, and structure. The project includes classes for Robot, actuators, and Main execution.
+This debugging task introduces a wheeled robot equipped with a lifting mechanism for carrying payloads. The provided URDF has several issues related to joint types, incorrect transforms, and missing elements. Your task is to debug the URDF and ensure the robot's model is valid and functional.
+
+`Instructions:`
+
+- Identify and fix the errors in the URDF file.
+- Verify that the lifting mechanism operates with the correct prismatic joint and range.
+- Ensure the wheels are configured correctly to enable a differential drive system.
+- Validate the corrected URDF using a ROS 2 launch file that spawns the robot in a simulated environment.
+
+
 
 ## Learning Outcome
 
 By completing this assignment, you will:
-- Apply C++ syntax to simulate basic robotics concepts.
-- Grasp fundamental OOP principles and understand their application in robotics software development.
+- Learn to create custom robots for simulations using URDF.
+- Understand how to define and manipulate joints and transforms in URDF.
+- Gain experience in building and simulating mobile manipulators and drive systems in ROS 2.
 ----
 ## Submission Process
 
-1. **Fork the Repository:**
-   - Fork the `Robotics Software Engineer` repository, ensuring all branches are included in your fork.
+1. **Create Files:**
+   - Navigate to the `module_3_assignment` package.
+   - Create the required URDF files to implement the tasks, including the robotic arm and mobile manipulator designs.
 
-2. **Clone Your Forked Repository:**
-   ```bash
-   git clone <your-forked-repo-url>
-   cd robotics_software_engineer
-   ```
+2. **Document Your Work:**
+   - Create a `README.md` file in the `module_3_assignment` package.
+   - Provide details about the files you created, including explanations of the URDF structure and the commands needed to visualize your robots in ROS 2.
 
-3. **Create Files:**
-   - Navigate to the `module_1_assignment` package.
-   - Create files for each task as required.
-
-4. **Document Your Work:**
-   - Create a `README.md` file in the `module_1_assignment` package.
-   - Provide details about the files you created.
-   - Explain the commands required to run your code for each specific task.
-
-5. **Submit Your Assignment:**
+3. **Submit Your Assignment:**
    - Push your changes to your forked repository.
    - Provide your repository link in the assignment submission text area.
 
-6. **Wait for Review:**
+4. **Wait for Review:**
    - Wait for the instructors to review your submission.
-

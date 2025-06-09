@@ -4,7 +4,7 @@
   <name>module_1_assignment</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="noshluk2@gmail.com">luqman</maintainer>
+  <maintainer email="info@robotisim.com">luqman</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
