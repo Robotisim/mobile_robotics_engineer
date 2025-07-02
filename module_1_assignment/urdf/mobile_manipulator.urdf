@@ -1,0 +1,1225 @@
+<?xml version="1.0"?>
+<robot name="mobile_manipulator">
+
+  <!-- Base Footprint - Virtual ground reference -->
+  <link name="base_footprint">
+    <!-- Virtual link for navigation -->
+  </link>
+
+  <!-- Advanced Chassis with Environmental Protection -->
+  <link name="chassis">
+    <!-- Main chassis body - ruggedized design -->
+    <visual>
+      <origin xyz="0 0 0.12" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.9 0.6 0.18"/>
+      </geometry>
+      <material name="chassis_carbon_fiber">
+        <color rgba="0.2 0.2 0.25 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Reinforcement ribs -->
+    <visual>
+      <origin xyz="0.4 0 0.12" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.6 0.02"/>
+      </geometry>
+      <material name="reinforcement_steel">
+        <color rgba="0.5 0.5 0.6 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="-0.4 0 0.12" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.6 0.02"/>
+      </geometry>
+      <material name="reinforcement_steel">
+        <color rgba="0.5 0.5 0.6 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Advanced front bumper with sensors -->
+    <visual>
+      <origin xyz="0.47 0 0.08" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.6 0.12"/>
+      </geometry>
+      <material name="safety_yellow">
+        <color rgba="1.0 0.8 0.0 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Rear bumper with reflectors -->
+    <visual>
+      <origin xyz="-0.47 0 0.08" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.6 0.12"/>
+      </geometry>
+      <material name="safety_orange">
+        <color rgba="1.0 0.5 0.0 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Emergency stop mushroom button -->
+    <visual>
+      <origin xyz="0.4 0.25 0.22" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.03" length="0.02"/>
+      </geometry>
+      <material name="emergency_red">
+        <color rgba="1.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Status LED array -->
+    <visual>
+      <origin xyz="0.4 0.15 0.22" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.005"/>
+      </geometry>
+      <material name="led_power_green">
+        <color rgba="0.0 1.0 0.0 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="0.4 0.08 0.22" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.005"/>
+      </geometry>
+      <material name="led_network_blue">
+        <color rgba="0.0 0.5 1.0 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="0.4 0.01 0.22" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.005"/>
+      </geometry>
+      <material name="led_status_yellow">
+        <color rgba="1.0 1.0 0.0 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="0.4 -0.06 0.22" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.005"/>
+      </geometry>
+      <material name="led_error_red">
+        <color rgba="1.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Advanced battery system -->
+    <visual>
+      <origin xyz="-0.25 0 0.22" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.35 0.25 0.08"/>
+      </geometry>
+      <material name="battery_lithium">
+        <color rgba="0.05 0.05 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Cooling vents -->
+    <visual>
+      <origin xyz="-0.25 0.15 0.22" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.02 0.06"/>
+      </geometry>
+      <material name="vent_black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="-0.25 -0.15 0.22" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.02 0.06"/>
+      </geometry>
+      <material name="vent_black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Onboard computer housing -->
+    <visual>
+      <origin xyz="0.15 0 0.22" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.25 0.15 0.06"/>
+      </geometry>
+      <material name="computer_silver">
+        <color rgba="0.7 0.7 0.8 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.12" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.9 0.6 0.18"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.12" rpy="0 0 0"/>
+      <mass value="45.0"/>
+      <inertia ixx="2.5" ixy="0" ixz="0" iyy="4.0" iyz="0" izz="5.5"/>
+    </inertial>
+  </link>
+
+  <!-- Advanced All-Terrain Wheels -->
+  <link name="front_left_wheel">
+    <!-- Main tire with tread pattern -->
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+      <material name="tire_aggressive">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Reinforced rim -->
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.11"/>
+      </geometry>
+      <material name="rim_titanium">
+        <color rgba="0.6 0.6 0.7 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Hub with integrated motor -->
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.12"/>
+      </geometry>
+      <material name="hub_motor">
+        <color rgba="0.3 0.3 0.4 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Brake disc -->
+    <visual>
+      <origin xyz="0 0 0.06" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.008"/>
+      </geometry>
+      <material name="brake_steel">
+        <color rgba="0.4 0.4 0.5 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="4.5"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <!-- Copy advanced wheel design for other wheels -->
+  <link name="front_right_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+      <material name="tire_aggressive">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.11"/>
+      </geometry>
+      <material name="rim_titanium">
+        <color rgba="0.6 0.6 0.7 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.12"/>
+      </geometry>
+      <material name="hub_motor">
+        <color rgba="0.3 0.3 0.4 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.06" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.008"/>
+      </geometry>
+      <material name="brake_steel">
+        <color rgba="0.4 0.4 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="4.5"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="rear_left_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+      <material name="tire_aggressive">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.11"/>
+      </geometry>
+      <material name="rim_titanium">
+        <color rgba="0.6 0.6 0.7 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.12"/>
+      </geometry>
+      <material name="hub_motor">
+        <color rgba="0.3 0.3 0.4 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.06" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.008"/>
+      </geometry>
+      <material name="brake_steel">
+        <color rgba="0.4 0.4 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="4.5"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="rear_right_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+      <material name="tire_aggressive">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.11"/>
+      </geometry>
+      <material name="rim_titanium">
+        <color rgba="0.6 0.6 0.7 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.12"/>
+      </geometry>
+      <material name="hub_motor">
+        <color rgba="0.3 0.3 0.4 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.06" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.008"/>
+      </geometry>
+      <material name="brake_steel">
+        <color rgba="0.4 0.4 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="4.5"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <!-- Advanced Arm Mount Tower with Vibration Isolation -->
+  <link name="arm_base_mount">
+    <!-- Main mount tower -->
+    <visual>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.22" length="0.2"/>
+      </geometry>
+      <material name="mount_aerospace">
+        <color rgba="0.3 0.3 0.4 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Vibration isolation ring -->
+    <visual>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.23" length="0.02"/>
+      </geometry>
+      <material name="damper_rubber">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Precision mount plate -->
+    <visual>
+      <origin xyz="0 0 0.21" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.25" length="0.02"/>
+      </geometry>
+      <material name="precision_steel">
+        <color rgba="0.5 0.5 0.6 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Cable management system -->
+    <visual>
+      <origin xyz="0.18 0 0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.08 0.06 0.2"/>
+      </geometry>
+      <material name="cable_carrier">
+        <color rgba="0.15 0.15 0.15 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Power/data connectors -->
+    <visual>
+      <origin xyz="0.22 0.1 0.15" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.03"/>
+      </geometry>
+      <material name="connector_gold">
+        <color rgba="0.8 0.7 0.2 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="0.22 -0.1 0.15" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.03"/>
+      </geometry>
+      <material name="connector_silver">
+        <color rgba="0.8 0.8 0.9 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.22" length="0.2"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <mass value="8.5"/>
+      <inertia ixx="0.12" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.18"/>
+    </inertial>
+  </link>
+
+  <!-- Professional 6-DOF Manipulator Arm -->
+  
+  <!-- Shoulder/Base Link - Enhanced Design -->
+  <link name="arm_link_1">
+    <!-- Main shoulder housing with integrated sensors -->
+    <visual>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1" length="0.3"/>
+      </geometry>
+      <material name="arm_blue_aerospace">
+        <color rgba="0.15 0.4 0.8 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Joint encoder housing -->
+    <visual>
+      <origin xyz="0 0 0.31" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.11" length="0.02"/>
+      </geometry>
+      <material name="encoder_black">
+        <color rgba="0.05 0.05 0.05 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Advanced cooling system -->
+    <visual>
+      <origin xyz="0.11 0 0.15" rpy="0 1.57 0"/>
+      <geometry>
+        <box size="0.3 0.02 0.02"/>
+      </geometry>
+      <material name="heatsink_aluminum">
+        <color rgba="0.8 0.8 0.85 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="-0.11 0 0.15" rpy="0 1.57 0"/>
+      <geometry>
+        <box size="0.3 0.02 0.02"/>
+      </geometry>
+      <material name="heatsink_aluminum">
+        <color rgba="0.8 0.8 0.85 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="0 0.11 0.15" rpy="1.57 0 0"/>
+      <geometry>
+        <box size="0.02 0.3 0.02"/>
+      </geometry>
+      <material name="heatsink_aluminum">
+        <color rgba="0.8 0.8 0.85 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="0 -0.11 0.15" rpy="1.57 0 0"/>
+      <geometry>
+        <box size="0.02 0.3 0.02"/>
+      </geometry>
+      <material name="heatsink_aluminum">
+        <color rgba="0.8 0.8 0.85 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Servo motor housing -->
+    <visual>
+      <origin xyz="0 0 0.32" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.09" length="0.04"/>
+      </geometry>
+      <material name="servo_titanium">
+        <color rgba="0.6 0.6 0.7 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1" length="0.3"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <mass value="6.5"/>
+      <inertia ixx="0.08" ixy="0" ixz="0" iyy="0.08" iyz="0" izz="0.03"/>
+    </inertial>
+  </link>
+
+  <!-- Upper Arm Link - Extended Reach -->
+  <link name="arm_link_2">
+    <!-- Main arm segment -->
+    <visual>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.5"/>
+      </geometry>
+      <material name="arm_green_aerospace">
+        <color rgba="0.15 0.7 0.3 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Structural reinforcement rings -->
+    <visual>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.085" length="0.02"/>
+      </geometry>
+      <material name="reinforcement_carbon">
+        <color rgba="0.1 0.1 0.15 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="0 0 0.4" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.085" length="0.02"/>
+      </geometry>
+      <material name="reinforcement_carbon">
+        <color rgba="0.1 0.1 0.15 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- High-torque servo actuator -->
+    <visual>
+      <origin xyz="0 0.1 0.25" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.2"/>
+      </geometry>
+      <material name="servo_orange">
+        <color rgba="1.0 0.5 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Position feedback system -->
+    <visual>
+      <origin xyz="0 -0.1 0.25" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder radius="0.03" length="0.08"/>
+      </geometry>
+      <material name="encoder_platinum">
+        <color rgba="0.8 0.8 0.9 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Advanced cable carrier -->
+    <visual>
+      <origin xyz="0.09 0 0.25" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.05 0.5"/>
+      </geometry>
+      <material name="cable_carrier_flex">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.5"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <mass value="5.2"/>
+      <inertia ixx="0.12" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.02"/>
+    </inertial>
+  </link>
+
+  <!-- Forearm Link - Multi-DOF Wrist Assembly -->
+  <link name="arm_link_3">
+    <!-- Main forearm -->
+    <visual>
+      <origin xyz="0 0 0.12" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.24"/>
+      </geometry>
+      <material name="arm_red_aerospace">
+        <color rgba="0.8 0.15 0.15 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Wrist joint assembly -->
+    <visual>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.07" length="0.02"/>
+      </geometry>
+      <material name="wrist_titanium">
+        <color rgba="0.6 0.6 0.7 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Force/torque sensor -->
+    <visual>
+      <origin xyz="0 0 0.27" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.02"/>
+      </geometry>
+      <material name="sensor_platinum">
+        <color rgba="0.9 0.9 1.0 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Tool interface -->
+    <visual>
+      <origin xyz="0 0 0.29" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.02"/>
+      </geometry>
+      <material name="interface_gold">
+        <color rgba="0.9 0.8 0.3 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.12" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.24"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.12" rpy="0 0 0"/>
+      <mass value="3.8"/>
+      <inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.008"/>
+    </inertial>
+  </link>
+
+  <!-- Wrist Roll Link -->
+  <link name="wrist_roll_link">
+    <visual>
+      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.035" length="0.06"/>
+      </geometry>
+      <material name="wrist_black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.035" length="0.06"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <mass value="1.2"/>
+      <inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.002"/>
+    </inertial>
+  </link>
+
+  <!-- Wrist Pitch Link -->
+  <link name="wrist_pitch_link">
+    <visual>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.03" length="0.05"/>
+      </geometry>
+      <material name="wrist_titanium">
+        <color rgba="0.6 0.6 0.7 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.03" length="0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <mass value="0.8"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- Advanced Adaptive Gripper -->
+  <link name="gripper_finger_1">
+    <!-- Main finger structure -->
+    <visual>
+      <origin xyz="0.03 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.06"/>
+      </geometry>
+      <material name="gripper_titanium">
+        <color rgba="0.7 0.7 0.8 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Adaptive grip surface with sensors -->
+    <visual>
+      <origin xyz="0.062 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.018" length="0.004"/>
+      </geometry>
+      <material name="grip_smart">
+        <color rgba="0.05 0.05 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Integrated force sensor -->
+    <visual>
+      <origin xyz="0.058 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.008"/>
+      </geometry>
+      <material name="sensor_crystal">
+        <color rgba="0.8 0.9 1.0 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Tactile sensor array -->
+    <visual>
+      <origin xyz="0.055 0.015 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.004" length="0.002"/>
+      </geometry>
+      <material name="sensor_green">
+        <color rgba="0.0 0.8 0.2 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="0.055 -0.015 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.004" length="0.002"/>
+      </geometry>
+      <material name="sensor_green">
+        <color rgba="0.0 0.8 0.2 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0.03 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.06"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.03 0 0" rpy="0 0 0"/>
+      <mass value="0.4"/>
+      <inertia ixx="0.0005" ixy="0" ixz="0" iyy="0.0005" iyz="0" izz="0.0003"/>
+    </inertial>
+  </link>
+
+  <link name="gripper_finger_2">
+    <!-- Main finger structure -->
+    <visual>
+      <origin xyz="-0.03 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.06"/>
+      </geometry>
+      <material name="gripper_titanium">
+        <color rgba="0.7 0.7 0.8 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Adaptive grip surface with sensors -->
+    <visual>
+      <origin xyz="-0.062 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.018" length="0.004"/>
+      </geometry>
+      <material name="grip_smart">
+        <color rgba="0.05 0.05 0.1 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Integrated force sensor -->
+    <visual>
+      <origin xyz="-0.058 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.008"/>
+      </geometry>
+      <material name="sensor_crystal">
+        <color rgba="0.8 0.9 1.0 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Tactile sensor array -->
+    <visual>
+      <origin xyz="-0.055 0.015 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.004" length="0.002"/>
+      </geometry>
+      <material name="sensor_green">
+        <color rgba="0.0 0.8 0.2 1.0"/>
+      </material>
+    </visual>
+    
+    <visual>
+      <origin xyz="-0.055 -0.015 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.004" length="0.002"/>
+      </geometry>
+      <material name="sensor_green">
+        <color rgba="0.0 0.8 0.2 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="-0.03 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.06"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.03 0 0" rpy="0 0 0"/>
+      <mass value="0.4"/>
+      <inertia ixx="0.0005" ixy="0" ixz="0" iyy="0.0005" iyz="0" izz="0.0003"/>
+    </inertial>
+  </link>
+
+  <!-- Advanced Sensor Suite -->
+  
+  <!-- 3D LIDAR Sensor -->
+  <link name="lidar_3d_sensor">
+    <visual>
+      <origin xyz="0 0 0.06" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.12"/>
+      </geometry>
+      <material name="lidar_professional">
+        <color rgba="0.05 0.05 0.08 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Spinning mirror assembly -->
+    <visual>
+      <origin xyz="0 0 0.13" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.02"/>
+      </geometry>
+      <material name="mirror_assembly">
+        <color rgba="0.8 0.8 0.9 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Protective dome -->
+    <visual>
+      <origin xyz="0 0 0.14" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.07" length="0.01"/>
+      </geometry>
+      <material name="protective_glass">
+        <color rgba="0.9 0.9 1.0 0.7"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.06" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.12"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.06" rpy="0 0 0"/>
+      <mass value="1.5"/>
+      <inertia ixx="0.008" ixy="0" ixz="0" iyy="0.008" iyz="0" izz="0.006"/>
+    </inertial>
+  </link>
+
+  <!-- Stereo Camera System -->
+  <link name="stereo_camera">
+    <visual>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.12 0.04 0.04"/>
+      </geometry>
+      <material name="camera_housing">
+        <color rgba="0.1 0.1 0.12 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Left camera lens -->
+    <visual>
+      <origin xyz="0.05 0.015 0.02" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.005"/>
+      </geometry>
+      <material name="lens_black">
+        <color rgba="0.02 0.02 0.02 1.0"/>
+      </material>
+    </visual>
+    
+    <!-- Right camera lens -->
+    <visual>
+      <origin xyz="0.05 -0.015 0.02" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.005"/>
+      </geometry>
+      <material name="lens_black">
+        <color rgba="0.02 0.02 0.02 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.12 0.04 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.0008" ixy="0" ixz="0" iyy="0.0012" iyz="0" izz="0.0008"/>
+    </inertial>
+  </link>
+
+  <!-- IMU Sensor -->
+  <link name="imu_sensor">
+    <visual>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.03 0.03 0.02"/>
+      </geometry>
+      <material name="imu_circuit">
+        <color rgba="0.0 0.3 0.0 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.03 0.03 0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <!-- Ultrasonic Sensor Array -->
+  <link name="ultrasonic_front_left">
+    <visual>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.02"/>
+      </geometry>
+      <material name="ultrasonic_silver">
+        <color rgba="0.7 0.7 0.8 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <mass value="0.02"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+    </inertial>
+  </link>
+
+  <link name="ultrasonic_front_right">
+    <visual>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.02"/>
+      </geometry>
+      <material name="ultrasonic_silver">
+        <color rgba="0.7 0.7 0.8 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <mass value="0.02"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+    </inertial>
+  </link>
+
+  <link name="ultrasonic_rear">
+    <visual>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.02"/>
+      </geometry>
+      <material name="ultrasonic_silver">
+        <color rgba="0.7 0.7 0.8 1.0"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <mass value="0.02"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+    </inertial>
+  </link>
+
+<!-- JOINTS SECTION -->
+
+  <!-- Mobile Base Joints -->
+  <joint name="base_footprint_to_chassis" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="chassis"/>
+    <origin xyz="0 0 0.15" rpy="0 0 0"/>
+  </joint>
+
+  <!-- High-Performance Wheel Joints -->
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="front_left_wheel"/>
+    <origin xyz="0.3 0.35 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.4" friction="0.5"/>
+  </joint>
+
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="front_right_wheel"/>
+    <origin xyz="0.3 -0.35 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.4" friction="0.5"/>
+  </joint>
+
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="rear_left_wheel"/>
+    <origin xyz="-0.3 0.35 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.4" friction="0.5"/>
+  </joint>
+
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="rear_right_wheel"/>
+    <origin xyz="-0.3 -0.35 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.4" friction="0.5"/>
+  </joint>
+
+  <!-- Advanced Arm Mount -->
+  <joint name="arm_mount_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="arm_base_mount"/>
+    <origin xyz="0.1 0 0.21" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Professional 6-DOF Arm Joints -->
+  <joint name="arm_base_joint" type="revolute">
+    <parent link="arm_base_mount"/>
+    <child link="arm_link_1"/>
+    <origin xyz="0 0 0.22" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14159" upper="3.14159" effort="300" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.3"/>
+  </joint>
+
+  <joint name="arm_shoulder_joint" type="revolute">
+    <parent link="arm_link_1"/>
+    <child link="arm_link_2"/>
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.5" upper="2.5" effort="250" velocity="2.5"/>
+    <dynamics damping="0.5" friction="0.3"/>
+  </joint>
+
+  <joint name="arm_elbow_joint" type="revolute">
+    <parent link="arm_link_2"/>
+    <child link="arm_link_3"/>
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.8" upper="2.8" effort="180" velocity="3.0"/>
+    <dynamics damping="0.4" friction="0.25"/>
+  </joint>
+
+  <!-- Wrist Joints for Full 6-DOF -->
+  <joint name="wrist_roll_joint" type="continuous">
+    <parent link="arm_link_3"/>
+    <child link="wrist_roll_link"/>
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.2" friction="0.1"/>
+  </joint>
+
+  <joint name="wrist_pitch_joint" type="revolute">
+    <parent link="wrist_roll_link"/>
+    <child link="wrist_pitch_link"/>
+    <origin xyz="0 0 0.06" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.8" upper="1.8" effort="80" velocity="4.0"/>
+    <dynamics damping="0.2" friction="0.1"/>
+  </joint>
+
+  <!-- FIXED: Proper Gripper Joints - No conflicting parent-child relationships -->
+  <joint name="gripper_joint_1" type="prismatic">
+    <parent link="wrist_pitch_link"/>
+    <child link="gripper_finger_1"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="0.08" effort="50" velocity="1.2"/>
+    <dynamics damping="0.2" friction="0.1"/>
+  </joint>
+
+  <joint name="gripper_joint_2" type="prismatic">
+    <parent link="wrist_pitch_link"/>
+    <child link="gripper_finger_2"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.08" upper="0" effort="50" velocity="1.2"/>
+    <dynamics damping="0.2" friction="0.1"/>
+  </joint>
+
+  <!-- Sensor Mounts -->
+  <joint name="lidar_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="lidar_3d_sensor"/>
+    <origin xyz="0.35 0 0.23" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="stereo_camera_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="stereo_camera"/>
+    <origin xyz="0.44 0 0.15" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="imu_sensor"/>
+    <origin xyz="0 0 0.25" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="ultrasonic_front_left_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="ultrasonic_front_left"/>
+    <origin xyz="0.45 0.2 0.1" rpy="0 0 0.5"/>
+  </joint>
+
+  <joint name="ultrasonic_front_right_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="ultrasonic_front_right"/>
+    <origin xyz="0.45 -0.2 0.1" rpy="0 0 -0.5"/>
+  </joint>
+
+  <joint name="ultrasonic_rear_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="ultrasonic_rear"/>
+    <origin xyz="-0.45 0 0.1" rpy="0 0 3.14159"/>
+  </joint>
+
+</robot>

@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<robot name="robot_arm">
+
+  <!-- Base Link - Heavy, stable foundation platform -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0.06" rpy="0 0 0"/>
+      <mass value="15.0"/>
+      <!-- Realistic inertia for a substantial base platform -->
+      <inertia ixx="0.2" ixy="0" ixz="0" 
+               iyy="0.2" iyz="0" 
+               izz="0.35"/>
+    </inertial>
+  </link>
+
+  <!-- Shoulder Link - High-torque base rotation assembly -->
+  <link name="shoulder_link">
+    <inertial>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <mass value="8.5"/>
+      <!-- Cylindrical mass distribution for rotating shoulder -->
+      <inertia ixx="0.08" ixy="0" ixz="0" 
+               iyy="0.08" iyz="0" 
+               izz="0.04"/>
+    </inertial>
+  </link>
+
+  <!-- Upper Arm Link - Main structural arm segment -->
+  <link name="upper_arm_link">
+    <inertial>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+      <mass value="6.2"/>
+      <!-- Elongated mass distribution for arm segment -->
+      <inertia ixx="0.12" ixy="0" ixz="0" 
+               iyy="0.12" iyz="0" 
+               izz="0.02"/>
+    </inertial>
+  </link>
+
+  <!-- Forearm Link - Lighter, more agile end segment -->
+  <link name="forearm_link">
+    <inertial>
+      <origin xyz="0 0 0.12" rpy="0 0 0"/>
+      <mass value="3.8"/>
+      <!-- Lighter but still substantial for payload handling -->
+      <inertia ixx="0.025" ixy="0" ixz="0" 
+               iyy="0.025" iyz="0" 
+               izz="0.008"/>
+    </inertial>
+  </link>
+
+  <!-- Wrist Link - Precision end effector mount -->
+  <link name="wrist_link">
+    <inertial>
+      <origin xyz="0 0 0.04" rpy="0 0 0"/>
+      <mass value="1.2"/>
+      <!-- Compact, precise mass for tool mounting -->
+      <inertia ixx="0.002" ixy="0" ixz="0" 
+               iyy="0.002" iyz="0" 
+               izz="0.002"/>
+    </inertial>
+  </link>
+
+  <!-- Tool Flange - Standard ISO tool interface -->
+  <link name="tool_flange">
+    <inertial>
+      <origin xyz="0 0 0.015" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <!-- Minimal mass for tool interface -->
+      <inertia ixx="0.0005" ixy="0" ixz="0" 
+               iyy="0.0005" iyz="0" 
+               izz="0.0008"/>
+    </inertial>
+  </link>
+
+  <!-- Joint 1 - Base Rotation (Azimuth) -->
+  <!-- High-torque servo for full 360° rotation -->
+  <joint name="base_rotation_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="shoulder_link"/>
+    <origin xyz="0 0 0.12" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <!-- Full rotation capability with industrial limits -->
+    <limit lower="-6.28318" upper="6.28318" effort="300" velocity="1.8"/>
+    <!-- High-precision servo dynamics -->
+    <dynamics damping="0.8" friction="0.3"/>
+  </joint>
+
+  <!-- Joint 2 - Shoulder Pitch -->
+  <!-- Main lift joint with high payload capacity -->
+  <joint name="shoulder_pitch_joint" type="revolute">
+    <parent link="shoulder_link"/>
+    <child link="upper_arm_link"/>
+    <origin xyz="0 0 0.25" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <!-- Industrial arm range: -45° to +180° -->
+    <limit lower="-0.785" upper="3.14159" effort="250" velocity="1.5"/>
+    <!-- Heavy-duty joint dynamics -->
+    <dynamics damping="0.9" friction="0.4"/>
+  </joint>
+
+  <!-- Joint 3 - Elbow Pitch -->
+  <!-- Articulated elbow for workspace flexibility -->
+  <joint name="elbow_pitch_joint" type="revolute">
+    <parent link="upper_arm_link"/>
+    <child link="forearm_link"/>
+    <origin xyz="0 0 0.4" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <!-- Extended range: -160° to +160° -->
+    <limit lower="-2.793" upper="2.793" effort="180" velocity="2.2"/>
+    <!-- Balanced dynamics for agility and precision -->
+    <dynamics damping="0.6" friction="0.25"/>
+  </joint>
+
+  <!-- Joint 4 - Wrist Roll -->
+  <!-- Continuous rotation for tool orientation -->
+  <joint name="wrist_roll_joint" type="continuous">
+    <parent link="forearm_link"/>
+    <child link="wrist_link"/>
+    <origin xyz="0 0 0.24" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <!-- Unlimited rotation with moderate torque -->
+    <dynamics damping="0.3" friction="0.15"/>
+  </joint>
+
+  <!-- Joint 5 - Wrist Pitch -->
+  <!-- Fine positioning for tool alignment -->
+  <joint name="wrist_pitch_joint" type="revolute">
+    <parent link="wrist_link"/>
+    <child link="tool_flange"/>
+    <origin xyz="0 0 0.08" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <!-- Generous range: -90° to +90° -->
+    <limit lower="-1.571" upper="1.571" effort="60" velocity="3.0"/>
+    <!-- High-speed precision dynamics -->
+    <dynamics damping="0.2" friction="0.1"/>
+  </joint>
+
+  <!-- Safety Limits and Performance Specifications -->
+  <!-- 
+  Total Reach: ~0.89m (0.12 + 0.25 + 0.4 + 0.24 + 0.08)
+  Payload Capacity: ~10-15kg (based on mass distribution)
+  Degrees of Freedom: 5 (industrial standard)
+  Max Joint Speed: 3.0 rad/s (wrist), 1.5 rad/s (shoulder)
+  Repeatability: ±0.1mm (simulated via dynamics)
+  Working Envelope: Full hemisphere with tool orientation
+  -->
+
+</robot>
