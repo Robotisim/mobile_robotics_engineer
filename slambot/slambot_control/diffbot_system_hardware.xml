@@ -1,0 +1,10 @@
+<library path="diffbot_system_hardware">
+  <!-- The class name is <namespace>/<ClassName> -->
+  <class name="slambot_control/DiffBotSystemHardware"
+         type="slambot_control::DiffBotSystemHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      A ros2_control hardware interface for a differential drive robot.
+    </description>
+  </class>
+</library>

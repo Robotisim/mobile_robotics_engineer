@@ -8,15 +8,32 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
+    slambot_pkg_dir = os.path.join(get_package_share_directory('slambot_bringup'))
     mapping_pkg_dir = os.path.join(get_package_share_directory('mapping'))
     navigation_pkg_dir=get_package_share_directory('navigation_')
-    map_file = os.path.join(mapping_pkg_dir,'map','big_room.yaml')
-    params_file = os.path.join(navigation_pkg_dir,'config','nav2_params.yaml')
+    map_file = os.path.join(mapping_pkg_dir,'map','my_saved_map.yaml')
+    params_file = os.path.join(navigation_pkg_dir,'config','nav2_slambot_params.yaml')
     rviz_config_file = os.path.join(navigation_pkg_dir,'config','nav2.rviz')
+ # ---------------- Odometry node ----------------
+    odom=Node(
+            package='slambot_bringup',
+            executable='odom_gen_node',
+            name='odom_node',
+            output='screen'
+        )
 
+        # ---------------- Static transform: base_link → laser ----------------
+    laser_tf=Node(
+
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='base_to_laser_tf',
+            arguments=['0', '0', '0.1', '1.57', '0', '0', 'base_link', 'laser']
+
+        )
     env_bringup = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join( mapping_pkg_dir, 'launch', 'maze_tb3_bringup.launch.py')
+            os.path.join( slambot_pkg_dir, 'launch', 'slam_bringup.launch.py')
         ),
     )
 
@@ -41,5 +58,7 @@ def generate_launch_description():
     # ld.add_action(env_bringup)
     ld.add_action(navigation)
     ld.add_action(rviz)
+    ld.add_action(laser_tf)
+    ld.add_action(odom)
 
     return ld

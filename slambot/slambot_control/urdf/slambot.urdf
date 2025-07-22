@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<robot name="slambot">
+
+  <link name="base_link"/>
+  <link name="right_wheel"/>
+  <link name="left_wheel"/>
+  <link name="laser"/>
+
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="-0.075 0.025 0.0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="-0.075 -0.025 0.0" rpy="0 0 3.14"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="laser_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="laser"/>
+    <origin xyz="0.0 0.0 0.1" rpy="0 0 1.57"/>
+  </joint>
+
+
+    <ros2_control name="Slambot" type="system">
+      <hardware>
+        <!-- This is our C++ plugin -->
+        <plugin>slambot_control/DiffBotSystemHardware</plugin>
+
+        <param name="left_wheel_name">left_wheel_joint</param>
+        <param name="right_wheel_name">right_wheel_joint</param>
+        <param name="loop_rate">30.0</param>
+        <param name="device">/dev/ttyUSB0</param>
+        <param name="baud_rate">115200</param>
+        <param name="timeout_ms">500</param>
+        <param name="ticks_per_rev">380</param>
+      </hardware>
+
+      <joint name="left_wheel_joint">
+        <command_interface name="velocity"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <!-- Right Wheel
+       -->
+      <joint name="right_wheel_joint">
+        <command_interface name="velocity"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+
+    </ros2_control>
+
+
+
+</robot>
