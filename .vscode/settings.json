@@ -1,0 +1,28 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/ros/ros2_ws/install/testing_folder/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test8oop/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test7oop/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test6/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test5/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test11/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test10/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/rse_m2/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/ahmad1/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/ros/ros2_ws/install/testing_folder/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test8oop/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test7oop/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test6/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test5/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test11/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/test10/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/rse_m2/lib/python3.10/site-packages",
+        "/home/ros/ros2_ws/install/ahmad1/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
